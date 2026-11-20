@@ -141,12 +141,16 @@ main{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,48px)}
 
 .rodape{text-align:center;color:var(--muted);font-size:.9rem;padding:40px 16px;border-top:1px solid var(--linha)}
 
+/* botão Painel sempre visível no topo, inclusive no celular */
+.topo .nav-painel{display:inline-flex;color:#0b0b12;background:linear-gradient(90deg,var(--vox),var(--clip));font-weight:700}
+.topo .nav-painel:hover{color:#0b0b12;filter:brightness(1.1)}
+
 @media (max-width:860px){
   .projeto{grid-template-columns:1fr}
   .projeto.inverte .texto{order:0}
   .escolha{grid-template-columns:1fr 1fr}
   .escolha .chip:last-child{grid-column:1/-1}
-  .topo nav{display:none}
+  .topo nav a:not(.nav-painel){display:none}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
