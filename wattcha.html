@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wattcha · Quanto o seu PC gasta de energia</title>
+<meta name="description" content="Programa grátis para Windows que mostra quanto o seu computador gasta de energia em reais e ajuda a deixá-lo mais rápido e limpo.">
+<meta name="theme-color" content="#0b0b12">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="inicio.css">
+<style>
+  .guia{max-width:820px;margin:0 auto;padding:40px 0 80px;--cor:var(--watt)}
+  .guia h1{font-size:clamp(2.2rem,6vw,3.4rem);font-weight:900;margin-bottom:12px}
+  .guia h2{font-size:1.5rem;font-weight:800;margin:56px 0 16px}
+  .guia h3{font-size:1.05rem;margin:22px 0 6px}
+  .guia p,.guia li{color:#d6d5e6}
+  .guia li{margin:6px 0}
+  .card{background:var(--card);border:1px solid var(--linha);border-radius:16px;padding:18px 20px;margin:16px 0}
+  .grade-recursos{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:16px 0}
+  .grade-recursos .card{margin:0}
+  .grade-recursos b{display:block;color:var(--fg);margin-bottom:4px}
+  .tabela{width:100%;border-collapse:collapse;margin:16px 0;font-size:.95rem}
+  .tabela th,.tabela td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--linha);vertical-align:top}
+  .tabela th{color:var(--muted);font-weight:600}
+  .tabela td:first-child{font-weight:700;color:var(--fg)}
+</style>
+</head>
+<body>
+<div class="fundo" aria-hidden="true"><span></span><span></span><span></span></div>
+<header class="topo">
+  <a class="marca" href="index.html"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c6cff"/><stop offset="1" stop-color="#ff5fa2"/></linearGradient></defs><path d="M4 7l12 19L28 7h-6l-6 10-6-10z" fill="url(#g)"/></svg>Visus</a>
+  <nav><a href="index.html#wattcha">Voltar</a></nav>
+</header>
+
+<main>
+<article class="guia">
+  <p class="tag">Programa grátis para Windows</p>
+  <h1>Wattcha</h1>
+  <p class="lead">Descubra quanto o seu computador gasta de energia, em reais, e deixe-o mais rápido e limpo,
+    tudo em um único programa leve e fácil de usar.</p>
+  <div class="acoes">
+    <a class="btn" href="wattcha/Wattcha-Instalador.exe">⬇ Baixar o Wattcha <small>Windows 10 e 11 · cerca de 200 KB · versão 1.0.3</small></a>
+  </div>
+
+  <h2>Para que serve</h2>
+  <p>Todo computador ligado gasta energia, e esse gasto aparece na conta de luz, mas é difícil saber quanto.
+    O Wattcha mede o consumo do PC enquanto você usa e mostra o resultado em reais: quanto custou hoje,
+    quanto dá por mês e como foi cada dia. Com isso, você decide melhor quando deixar o PC ligado, quando
+    hibernar e qual modo de desempenho usar.</p>
+  <p>Além do medidor, ele reúne em um só lugar as ferramentas que mais ajudam no dia a dia: modos de
+    desempenho, limpeza de arquivos desnecessários e hibernação agendada.</p>
+
+  <h2>O que ele faz</h2>
+  <div class="grade-recursos">
+    <div class="card"><b>⚡ Medidor de energia</b>Calcula o consumo do PC todo (processador, placa de vídeo, memória, discos e demais peças) e mostra o gasto por hora, por dia e por mês, em reais.</div>
+    <div class="card"><b>📅 Histórico diário</b>Consumo, custo e tempo ligado de cada dia, com a média diária.</div>
+    <div class="card"><b>🚀 Modos de desempenho</b>Equilibrado, Alto desempenho e Gaming, cada um explicado, com botão para voltar ao que era antes.</div>
+    <div class="card"><b>🧹 Limpeza</b>Remove arquivos temporários e lixo do Windows, em modo moderado ou agressivo. Não mexe em documentos, fotos, jogos nem senhas.</div>
+    <div class="card"><b>🌙 Hibernação</b>Liga ou desliga a hibernação e permite agendar um horário para o PC hibernar e religar sozinho.</div>
+    <div class="card"><b>🔄 Atualiza sozinho</b>Uma vez por dia, confere se há versão nova e se atualiza. Você nunca precisa baixar de novo.</div>
+  </div>
+
+  <h2>Como funciona</h2>
+  <ol>
+    <li>Ao abrir, o Wattcha identifica as peças do seu computador e começa a medir automaticamente.</li>
+    <li>Você informa o preço do kWh da sua conta de luz (o valor vem impresso na conta: divida o total em reais pelo consumo em kWh).</li>
+    <li>Ele calcula o consumo em tempo real e guarda um registro de cada dia.</li>
+    <li>Ao fechar a janela, ele continua medindo discretamente, com um ícone perto do relógio. Também pode abrir junto com o Windows.</li>
+  </ol>
+  <div class="card"><strong>Importante:</strong> os valores são uma <strong>estimativa</strong> calculada a partir das peças e
+    do uso do computador. Para saber o valor exato, só com um medidor ligado na tomada. Ainda assim, a estimativa é
+    ótima para comparar dias, hábitos e modos de uso.</div>
+
+  <h2>Como instalar (passo a passo)</h2>
+  <ol>
+    <li>Clique em <strong>Baixar o Wattcha</strong>. Se o navegador perguntar, escolha <strong>Manter</strong>.</li>
+    <li>Abra o arquivo baixado, <strong>Wattcha-Instalador.exe</strong>.</li>
+    <li>Se aparecer a tela azul “O Windows protegeu o computador”, clique em <strong>Mais informações</strong> e depois em
+      <strong>Executar assim mesmo</strong>. Isso acontece com programas novos que ainda não são conhecidos pelo Windows.</li>
+    <li>Escolha se quer um atalho na Área de Trabalho. O Wattcha abre sozinho e já fica no Menu Iniciar.</li>
+    <li>Na primeira tela, confira o preço do kWh. Pronto: ele já está medindo.</li>
+  </ol>
+  <p>Não é preciso ser administrador para instalar. Algumas funções (modos de desempenho, hibernação e limpeza
+    agressiva) pedem permissão de administrador na hora de usar; o próprio programa mostra o botão para isso.</p>
+
+  <h2>Requisitos</h2>
+  <table class="tabela">
+    <tr><th>Item</th><th>Necessário</th></tr>
+    <tr><td>Sistema</td><td>Windows 10 ou Windows 11</td></tr>
+    <tr><td>Espaço</td><td>Menos de 1 MB</td></tr>
+    <tr><td>Internet</td><td>Só para baixar e para as atualizações automáticas</td></tr>
+  </table>
+
+  <h2>Perguntas frequentes</h2>
+  <h3>É seguro? Por que o Windows avisa?</h3>
+  <p>O Windows avisa em qualquer programa novo que ainda não tem uma assinatura digital paga. O Wattcha não instala
+    nada escondido, só usa a internet para conferir se há versão nova (e confere a integridade de cada atualização
+    antes de instalar) e guarda os seus dados apenas no seu computador.</p>
+  <h3>Muda alguma coisa no meu PC sem eu pedir?</h3>
+  <p>Não. Modo de desempenho, limpeza e hibernação só mudam o que você escolher e confirmar. Os modos têm botão para voltar como estava.</p>
+  <h3>Como desinstalar?</h3>
+  <p>Abra <strong>Configurações &gt; Aplicativos</strong> no Windows, procure <strong>Wattcha</strong> e clique em <strong>Desinstalar</strong>.</p>
+  <h3>Funciona no Mac ou no celular?</h3>
+  <p>Não. O Wattcha é só para Windows.</p>
+  <h3>Ainda com dúvida?</h3>
+  <p>Escreva para <a href="mailto:gahbruxxo@visusclipper.online">gahbruxxo@visusclipper.online</a>.</p>
+
+  <div class="acoes"><a class="btn" href="wattcha/Wattcha-Instalador.exe">⬇ Baixar o Wattcha</a></div>
+</article>
+</main>
+<footer class="rodape"><p>© 2026 Visus · <a href="index.html">Todos os projetos</a> · <a href="privacidade.html">Política de privacidade</a></p></footer>
+</body>
+</html>

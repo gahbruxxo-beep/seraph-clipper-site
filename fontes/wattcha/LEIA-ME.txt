@@ -1,0 +1,17 @@
+﻿Wattcha - codigo-fonte e como publicar uma versao nova
+=====================================================
+Pagina: https://visusclipper.online/wattcha.html
+Arquivos baixados pelas pessoas (pasta wattcha/ deste repositorio, servida pelo GitHub Pages):
+  - Wattcha-Instalador.exe : instalador (so a primeira instalacao)
+  - Wattcha.ps1            : o programa (os apps instalados baixam este arquivo sozinhos)
+  - versao.json            : {"versao","sha256","notas"} - o app confere este arquivo 1x por dia
+
+Para publicar uma versao nova:
+ 1. Edite fontes/wattcha/Wattcha.ps1 e aumente a linha  $VersaoApp = 'x.y.z'
+ 2. Copie para wattcha/Wattcha.ps1 (byte a byte; o .gitattributes impede conversao de quebras de linha)
+ 3. Atualize wattcha/versao.json com a nova versao, o SHA-256 do arquivo e uma frase em "notas"
+ 4. git push (com o e-mail noreply do GitHub) -> os apps instalados se atualizam sozinhos
+Para refazer o instalador: copie Instalar.ps1, Wattcha.ps1, Abrir-Wattcha.vbs, wattcha.ico e Desinstalar.ps1
+para uma pasta, troque C:\PASTA-DE-BUILD\ no .sed por ela e rode: iexpress /N /Q wattcha-instalador.sed
+(o .sed precisa ter quebras de linha do Windows, CRLF).
+Ate a versao 1.0.2 o app procurava atualizacoes no servidor da radio; a 1.0.3 foi publicada la tambem como ponte.
