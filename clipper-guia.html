@@ -128,7 +128,14 @@
     <li><strong>Agendamento:</strong> em <strong>Acesso</strong>, ligue <strong>Rodar sozinho todo dia</strong> e escolha um horário (por exemplo, de madrugada) para ele verificar os canais e processar a fila todos os dias.</li>
   </ul>
 
-  <h2 id="problemas"><span class="n">7</span>Problemas comuns</h2>
+  <h2 id="backup"><span class="n">7</span>Backup e atualizações</h2>
+  <ul>
+    <li><strong>Atualizações:</strong> o Visus Clipper confere o site a cada 6 horas e se atualiza sozinho, sem você baixar nada de novo. Em <strong>Acesso &gt; Sistema</strong> você vê a versão e pode procurar atualização na hora.</li>
+    <li><strong>Backup:</strong> dê dois cliques em <strong>configurar-backup.bat</strong> (na pasta do programa) e crie uma senha. Todo dia, às 03:30, as suas configurações, equipe, contas conectadas, fila e canais vão criptografados para o seu Google Drive (pasta VisusClipper &gt; _backup).</li>
+    <li><strong>Se trocar ou formatar o PC:</strong> instale de novo, baixe o backup mais recente do Drive e, na pasta do programa, rode <code>powershell -ExecutionPolicy Bypass -File scripts\backup.ps1 -Restaurar CAMINHO-DO-ARQUIVO</code>. Tudo volta como estava. <strong>Anote a senha</strong>: sem ela, o backup não abre.</li>
+  </ul>
+
+  <h2 id="problemas"><span class="n">8</span>Problemas comuns</h2>
   <h3>“Não consegui falar com o PC”</h3>
   <p>O programa está desligado. Abra o atalho <strong>Visus Clipper</strong> na Área de Trabalho e espere alguns segundos.</p>
   <h3>A biblioteca está vazia / “Google Drive desconectado”</h3>
