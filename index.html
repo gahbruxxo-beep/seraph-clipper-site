@@ -3,21 +3,169 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Visus Clipper</title>
-<link rel="stylesheet" href="style.css">
+<title>Visus — projetos</title>
+<meta name="description" content="VisusTV, VoxVisus, Visus Clipper e RDW: os projetos da família Visus.">
+<meta property="og:title" content="Visus — projetos">
+<meta property="og:description" content="Player de IPTV, comunidade privada, clipes com IA e portal de notícias.">
+<meta name="theme-color" content="#0b0b12">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="inicio.css">
 </head>
 <body>
+<div class="fundo" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<header class="topo">
+  <a class="marca" href="#"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c6cff"/><stop offset="1" stop-color="#ff5fa2"/></linearGradient></defs><path d="M4 7l12 19L28 7h-6l-6 10-6-10z" fill="url(#g)"/></svg>Visus</a>
+  <nav>
+    <a href="#visustv">VisusTV</a><a href="#voxvisus">VoxVisus</a><a href="#clipper">Clipper</a><a href="#rdw">RDW</a>
+  </nav>
+</header>
+
 <main>
-<h1>Visus Clipper</h1>
-<p class="sub">Ferramenta pessoal, gratuita e local para gerar clipes de lives e vídeos.</p>
-<p>O Visus Clipper roda inteiramente no computador do próprio usuário: baixa o vídeo, transcreve,
-escolhe os melhores momentos com um modelo de IA local e gera clipes verticais. Nenhum vídeo ou áudio
-é enviado para serviços de terceiros durante o processamento.</p>
-<p>O único acesso a serviços do Google é opcional: o envio dos clipes prontos para o
-<strong>Google Drive do próprio usuário</strong>, usando a permissão mais restrita disponível
-(<code>drive.file</code>), que só permite ao app ver e gerenciar os arquivos que ele mesmo criou.</p>
-<p><a href="privacidade.html">Política de privacidade</a></p>
-<footer>Uso pessoal. Não é um serviço comercial e não coleta dados de terceiros.</footer>
+<section class="hero">
+  <p class="selo">Projetos independentes, feitos com carinho</p>
+  <h1>Um lugar,<br><em>quatro mundos.</em></h1>
+  <p class="lead">Assista, converse, crie e fique por dentro. Escolha um projeto para conhecer.</p>
+  <div class="escolha">
+    <a class="chip c-tv" href="#visustv"><b>VisusTV</b><small>Player de IPTV</small></a>
+    <a class="chip c-vox" href="#voxvisus"><b>VoxVisus</b><small>Comunidade privada</small></a>
+    <a class="chip c-clip" href="#clipper"><b>Visus Clipper</b><small>Clipes com IA</small></a>
+    <a class="chip c-rdw" href="#rdw"><b>RDW</b><small>Notícias e eventos</small></a>
+  </div>
+</section>
+
+<!-- VisusTV -->
+<section id="visustv" class="projeto p-tv">
+  <div class="texto revela">
+    <p class="tag">Player de IPTV · PC e Android</p>
+    <h2>VisusTV</h2>
+    <p class="lead">Um player bonito e rápido para a sua lista de IPTV. TV ao vivo com guia de programação,
+      filmes, séries e muito mais, no computador, no celular e na TV Box.</p>
+    <div class="aviso"><strong>Importante:</strong> o VisusTV é só o <em>player</em>. Ele não vende nem fornece
+      canais. Você usa a lista (M3U ou Xtream) que já tem do seu provedor.</div>
+    <ol class="passos">
+      <li><b>Baixe</b> o app para o seu aparelho.</li>
+      <li><b>Adicione sua lista</b>: cole o link M3U ou os dados Xtream do seu provedor.</li>
+      <li><b>Assista</b>: canais, guia, filmes e séries organizados na hora.</li>
+    </ol>
+    <ul class="recursos">
+      <li>Guia de programação (EPG)</li><li>Filmes e séries</li><li>Catch-up</li><li>Favoritos e busca</li>
+      <li>PIN para conteúdo adulto</li><li>Picture-in-picture</li><li>Legendas</li><li>Controle remoto da TV Box</li>
+    </ul>
+    <div class="acoes">
+      <a class="btn" href="https://drive.google.com/file/d/15KnsBPqpRwDVM1Ur8_UgxDdCxJ1wMOhL/view?usp=drivesdk" target="_blank" rel="noopener">⬇ Android / TV Box <small>APK 1.0.2 · 58 MB</small></a>
+      <a class="btn sec" href="https://drive.google.com/file/d/1t2iANETh9eeqblRXyuQdKsSGtuE77KIN/view?usp=drivesdk" target="_blank" rel="noopener">⬇ Windows <small>ZIP 1.0.3 · 173 MB</small></a>
+    </div>
+    <p class="nota">No Android, permita “instalar apps desta fonte” quando o celular pedir. No Windows, extraia o ZIP e abra o VisusTV.</p>
+  </div>
+  <div class="previa revela" aria-hidden="true">
+    <div class="tv">
+      <div class="tv-tela">
+        <div class="tv-video"><span class="ao-vivo">AO VIVO</span><span class="tv-titulo">Canal 1 · Jornal da noite</span><i class="barra"></i></div>
+        <div class="epg">
+          <div><b>Canal 1</b><span class="prog agora" style="--w:55%">Jornal da noite</span><span class="prog" style="--w:45%">Filme</span></div>
+          <div><b>Canal 2</b><span class="prog" style="--w:30%">Esportes</span><span class="prog" style="--w:70%">Futebol ao vivo</span></div>
+          <div><b>Canal 3</b><span class="prog" style="--w:65%">Série</span><span class="prog" style="--w:35%">Desenhos</span></div>
+        </div>
+      </div>
+      <div class="tv-pe"></div>
+    </div>
+  </div>
+</section>
+
+<!-- VoxVisus -->
+<section id="voxvisus" class="projeto p-vox inverte">
+  <div class="texto revela">
+    <p class="tag">Comunidade privada · só com convite</p>
+    <h2>VoxVisus</h2>
+    <p class="lead">Um cantinho só seu e dos seus amigos: salas de texto, voz, vídeo e compartilhamento de tela,
+      minigames, emblemas e notificações. Funciona no PC, Android e iPhone, direto do navegador.</p>
+    <ul class="recursos">
+      <li>Salas de texto</li><li>Voz e vídeo</li><li>Compartilhar tela</li><li>Minigames</li>
+      <li>Emblemas e cargos</li><li>Notificações</li><li>Instala como app</li>
+    </ul>
+    <div class="aviso"><strong>Entrada só por convite.</strong> O VoxVisus é fechado e pequeno de propósito.
+      Peça um código de convite para você e para seus amigos. Cada pessoa recebe o seu.</div>
+    <div class="acoes">
+      <a class="btn" href="mailto:gahbruxxo@visusclipper.online?subject=Convite%20VoxVisus&body=Ol%C3%A1!%20Quero%20entrar%20no%20VoxVisus.%0A%0AMeu%20nome%3A%20%0AComo%20te%20conhe%C3%A7o%3A%20%0AQuantos%20convites%20(eu%20%2B%20amigos)%3A%20">✉ Pedir convite</a>
+      <a class="btn sec" href="https://voxvisus.duckdns.org:8443/" target="_blank" rel="noopener">Já tenho convite →</a>
+    </div>
+  </div>
+  <div class="previa revela" aria-hidden="true">
+    <div class="chat">
+      <div class="chat-lado"><i></i><i class="on"></i><i></i><i></i></div>
+      <div class="chat-corpo">
+        <div class="chat-topo"># geral <span>🔊 Sala de voz · 3</span></div>
+        <div class="msg"><b style="--c:#7c6cff">Ana</b><p>bora jogar hoje?</p></div>
+        <div class="msg"><b style="--c:#ff5fa2">Leo</b><p>bora! entro na voz às 21h 🎮</p></div>
+        <div class="msg"><b style="--c:#2dd4bf">Bia</b><p>vou compartilhar a tela</p></div>
+        <div class="digitando"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Clipper -->
+<section id="clipper" class="projeto p-clip">
+  <div class="texto revela">
+    <p class="tag">Clipes com inteligência artificial</p>
+    <h2>Visus Clipper</h2>
+    <p class="lead">Transforma lives e vídeos longos em cortes verticais prontos para TikTok, Shorts, Reels e Kwai.
+      A IA ouve o vídeo, acha os melhores momentos, enquadra o rosto, coloca legenda animada e cria a capa.</p>
+    <ol class="passos">
+      <li><b>Cola o link</b> da live (Kick, Twitch, YouTube…).</li>
+      <li><b>A IA corta</b> os melhores momentos sozinha.</li>
+      <li><b>Você aprova</b> e ele publica nas redes.</li>
+    </ol>
+    <div class="acoes">
+      <a class="btn" href="https://painel.visusclipper.online/">Abrir o painel →</a>
+      <a class="btn sec" href="clipper.html">Sobre e privacidade</a>
+    </div>
+    <p class="nota">O painel é de uso privado: entra só quem tem acesso liberado.</p>
+  </div>
+  <div class="previa revela" aria-hidden="true">
+    <div class="fone">
+      <div class="fone-tela">
+        <div class="clip-rosto"></div>
+        <p class="legenda"><span>EU</span> <span>NÃO</span> <span class="hl">ACREDITO</span> <span>NISSO</span></p>
+        <div class="clip-lado"><i>♥</i><i>💬</i><i>↗</i></div>
+        <div class="clip-prog"><i></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RDW -->
+<section id="rdw" class="projeto p-rdw inverte">
+  <div class="texto revela">
+    <p class="tag">Portal de notícias</p>
+    <h2>RDW</h2>
+    <p class="lead">Notícias do Brasil e do mundo, fofocas dos famosos e a agenda de eventos da região, tudo num só
+      lugar. Ainda tem clima, horóscopo, jogos e uma rádio web tocando 24 horas.</p>
+    <ul class="recursos">
+      <li>Notícias</li><li>Fofocas</li><li>Agenda de eventos</li><li>Clima</li><li>Horóscopo</li><li>Jogos</li><li>Rádio 24h</li>
+    </ul>
+    <div class="acoes">
+      <a class="btn" href="https://radiowebzs.com.br/" target="_blank" rel="noopener">Ler as notícias →</a>
+    </div>
+  </div>
+  <div class="previa revela" aria-hidden="true">
+    <div class="jornal">
+      <div class="j-topo"><b>RDW</b><span>Notícias · Fofocas · Eventos</span></div>
+      <div class="j-destaque"><span class="j-cat">Mundo</span><i></i><i class="curta"></i></div>
+      <div class="j-grade">
+        <div><span class="j-cat rosa">Fofoca</span><i></i><i class="curta"></i></div>
+        <div><span class="j-cat verde">Eventos</span><i></i><i class="curta"></i></div>
+      </div>
+      <div class="j-radio"><span class="pulso"></span> Rádio ao vivo <span class="eq"><i></i><i></i><i></i><i></i></span></div>
+    </div>
+  </div>
+</section>
 </main>
+
+<footer class="rodape">
+  <p>Família Visus · <a href="mailto:gahbruxxo@visusclipper.online">contato</a> · <a href="privacidade.html">privacidade</a></p>
+</footer>
+<script src="inicio.js"></script>
 </body>
 </html>
