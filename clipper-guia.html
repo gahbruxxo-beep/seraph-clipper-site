@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visus Clipper · Como instalar e usar</title>
+<meta name="description" content="Requisitos e passo a passo para instalar o Visus Clipper e fazer seus primeiros cortes.">
+<meta name="theme-color" content="#0b0b12">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="inicio.css">
+<style>
+  .guia{max-width:820px;margin:0 auto;padding:40px 0 80px;--cor:var(--clip)}
+  .guia h1{font-size:clamp(2rem,5vw,3rem);font-weight:900;margin-bottom:12px}
+  .guia h2{font-size:1.5rem;font-weight:800;margin:56px 0 16px;display:flex;align-items:center;gap:12px}
+  .guia h2 .n{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--clip);color:#0b0b12;font-size:1rem}
+  .guia h3{font-size:1.05rem;margin:24px 0 6px}
+  .guia p,.guia li{color:#d6d5e6}
+  .guia li{margin:6px 0}
+  .tabela{width:100%;border-collapse:collapse;margin:16px 0;font-size:.95rem}
+  .tabela th,.tabela td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--linha);vertical-align:top}
+  .tabela th{color:var(--muted);font-weight:600}
+  .tabela td:first-child{font-weight:700;color:var(--fg)}
+  .card{background:var(--card);border:1px solid var(--linha);border-radius:16px;padding:18px 20px;margin:16px 0}
+  kbd{background:#22223a;border:1px solid var(--linha);border-radius:6px;padding:1px 7px;font-size:.88em}
+  .ok{color:#4ade80}.nao{color:#f87171}
+  .indice{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0}
+  .indice a{padding:6px 12px;border-radius:999px;background:var(--card);border:1px solid var(--linha);text-decoration:none;font-size:.9rem}
+  @media (max-width:600px){.tabela th:nth-child(3),.tabela td:nth-child(3){display:none}}
+</style>
+</head>
+<body>
+<div class="fundo" aria-hidden="true"><span></span><span></span><span></span></div>
+<header class="topo">
+  <a class="marca" href="index.html"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c6cff"/><stop offset="1" stop-color="#ff5fa2"/></linearGradient></defs><path d="M4 7l12 19L28 7h-6l-6 10-6-10z" fill="url(#g)"/></svg>Visus</a>
+  <nav><a href="index.html#clipper">Voltar</a></nav>
+</header>
+
+<main>
+<article class="guia">
+  <p class="tag">Visus Clipper · guia completo</p>
+  <h1>Como instalar e usar</h1>
+  <p class="lead">Um passo a passo para quem nunca fez isso antes. Siga na ordem e, em cerca de uma hora,
+    você terá seus primeiros cortes prontos.</p>
+  <div class="indice">
+    <a href="#requisitos">Requisitos</a><a href="#instalar">Instalar</a><a href="#primeiro">Primeiro corte</a>
+    <a href="#publicar">Revisar e publicar</a><a href="#equipe">Equipe</a><a href="#automatico">Modo automático</a><a href="#problemas">Problemas comuns</a>
+  </div>
+
+  <h2 id="requisitos"><span class="n">1</span>Requisitos mínimos</h2>
+  <p>O Visus Clipper funciona no <strong>seu computador</strong>: é ele que faz o trabalho pesado da inteligência
+    artificial. Por isso, confira se o seu PC atende aos requisitos:</p>
+  <table class="tabela">
+    <tr><th>Item</th><th>Mínimo</th><th>Recomendado</th></tr>
+    <tr><td>Sistema</td><td>Windows 10 (64 bits)</td><td>Windows 11</td></tr>
+    <tr><td>Memória RAM</td><td>8 GB</td><td>16 GB ou mais</td></tr>
+    <tr><td>Placa de vídeo</td><td>Qualquer (funciona só com o processador, mas fica bem mais lento)</td><td>NVIDIA GeForce série 10 ou mais nova, com 6 GB ou mais</td></tr>
+    <tr><td>Espaço livre</td><td>20 GB</td><td>50 GB (vídeos longos ocupam bastante enquanto são processados)</td></tr>
+    <tr><td>Internet</td><td>Banda larga</td><td>Quanto mais rápida, mais rápido baixa as lives</td></tr>
+    <tr><td>Conta Google</td><td colspan="2">Necessária: os cortes ficam guardados no <strong>seu</strong> Google Drive</td></tr>
+  </table>
+  <div class="card">
+    <strong>Como saber se tenho placa NVIDIA?</strong> Aperte <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Esc</kbd>,
+    abra a aba <em>Desempenho</em> e procure por <em>GPU</em>. Se aparecer “NVIDIA GeForce…”, você tem.
+  </div>
+  <p><strong>Quanto tempo leva?</strong> Com uma placa NVIDIA, uma live de 3 horas vira cortes em cerca de 30 a 60 minutos.
+    Sem placa NVIDIA, pode levar várias horas.</p>
+
+  <h2 id="instalar"><span class="n">2</span>Instalar</h2>
+  <ol>
+    <li><strong>Baixe o instalador:</strong> <a href="download/VisusClipper.zip">VisusClipper.zip</a>.</li>
+    <li><strong>Extraia a pasta:</strong> clique com o botão direito no arquivo baixado → <em>Extrair tudo…</em>.
+      Escolha um lugar fixo, como <em>Documentos</em>. Não deixe em <em>Downloads</em>, porque o programa vai morar ali.</li>
+    <li><strong>Abra a pasta extraída</strong> e dê dois cliques em <strong>Instalar.bat</strong>.
+      <br>Se o Windows mostrar “O Windows protegeu o computador”, clique em <em>Mais informações</em> → <em>Executar assim mesmo</em>.</li>
+    <li><strong>Espere.</strong> Uma janela preta mostra o progresso em 7 etapas. Na primeira vez são baixados
+      cerca de 10 GB (programas e modelos de IA). Pode levar de 20 a 60 minutos. Não feche a janela.</li>
+    <li><strong>Conecte o Google Drive:</strong> na etapa 5 o navegador abre sozinho. Entre na sua conta Google
+      e clique em <em>Permitir</em>. O programa só consegue ver os arquivos que ele mesmo criar.</li>
+    <li><strong>Pronto!</strong> No fim, o painel abre no navegador e aparece um atalho <strong>Visus Clipper</strong>
+      na Área de Trabalho. A janela preta mostra a <strong>senha do painel</strong>. Ela também fica no arquivo
+      <em>SENHA_DO_PAINEL.txt</em>, dentro da pasta do programa.</li>
+  </ol>
+  <div class="card">Algo deu errado no meio? Dê dois cliques em <strong>Instalar.bat</strong> de novo.
+    Ele continua de onde parou e só completa o que falta.</div>
+
+  <h2 id="primeiro"><span class="n">3</span>Fazer o primeiro corte</h2>
+  <ol>
+    <li>Abra o atalho <strong>Visus Clipper</strong> na Área de Trabalho e entre com a senha.</li>
+    <li>Na tela <strong>Início</strong>, cole o link de uma live ou vídeo (Kick, Twitch, YouTube e outros) no campo <strong>Cole o link da live/vídeo</strong> e clique em <strong>Adicionar à fila</strong>.</li><li>Clique em <strong>Processar fila agora</strong>.</li>
+    <li>Acompanhe o andamento na própria tela: baixando, transcrevendo, escolhendo os momentos, gerando os cortes e enviando para o Drive.</li>
+    <li>Quando terminar, os cortes aparecem em <strong>Revisar</strong> e em <strong>Clipes</strong>, cada um com título, legenda, hashtags e capa prontos.</li>
+  </ol>
+  <p>Dica: o painel tem um <strong>tour interativo</strong> que aparece na primeira vez e um <strong>Manual</strong> no menu. Use sempre que tiver dúvida.</p>
+
+  <h2 id="publicar"><span class="n">4</span>Revisar e publicar</h2>
+  <ol>
+    <li>Em <strong>Revisar</strong>, assista cada corte.</li>
+    <li>Gostou? Toque em <strong>Publicar</strong>, escolha as redes e confira o texto. Não gostou? Toque em <strong>Rejeitar</strong>.</li>
+    <li>Para publicar sozinho, conecte suas contas em <strong>Contas</strong> (TikTok, YouTube, Instagram e Facebook). O próprio painel explica cada passo.</li>
+    <li>Prefere postar à mão? Use <strong>Baixar</strong> e <strong>Copiar legenda</strong>.</li>
+  </ol>
+  <p>Para liberar espaço, em <strong>Clipes</strong> use <strong>Limpar rejeitados</strong> ou exclua cortes e vídeos.
+    Tudo vai para a lixeira do Google Drive e pode ser recuperado por 30 dias.</p>
+
+  <h2 id="equipe"><span class="n">5</span>Acesso para a equipe</h2>
+  <p>Você pode liberar o painel para outras pessoas, cada uma com o próprio login e um cargo:</p>
+  <table class="tabela">
+    <tr><th>Cargo</th><th>O que pode fazer</th><th></th></tr>
+    <tr><td>Dono</td><td>Tudo: pessoas e cargos, excluir cortes, acesso de fora, agendamento e senha</td><td></td></tr>
+    <tr><td>Editor</td><td>Colocar links, revisar, aprovar e publicar cortes</td><td></td></tr>
+    <tr><td>Leitor</td><td>Só assistir e baixar</td><td></td></tr>
+  </table>
+  <ol>
+    <li>Vá em <strong>Acesso</strong> e ligue <strong>Acesso pelo celular</strong> (acesso de fora de casa). Assim a pessoa consegue abrir o painel da casa dela.</li>
+    <li>No cartão <strong>Pessoas</strong>, escreva o e-mail da pessoa, escolha o cargo e clique em <strong>Dar acesso</strong>.</li>
+    <li>Aparece um <strong>link de convite</strong>. Copie e mande para a pessoa (WhatsApp, e-mail…).</li>
+    <li>A pessoa abre o link, cria a própria senha e já entra. Da próxima vez, ela entra com e-mail e senha.</li>
+  </ol>
+  <p>O Dono pode mudar o cargo ou tirar o acesso de qualquer pessoa a qualquer momento, e o efeito é imediato.
+    Esqueceu a senha? O Dono gera um novo convite no botão ao lado do nome da pessoa.</p>
+  <div class="card">O painel só fica acessível enquanto o seu PC está ligado e com o Visus Clipper aberto.
+    Ao religar o acesso de fora, o endereço muda: compartilhe o novo endereço com a equipe.</div>
+
+  <h2 id="automatico"><span class="n">6</span>Modo automático</h2>
+  <ul>
+    <li><strong>Fila:</strong> cole vários links de uma vez; eles são processados um após o outro.</li>
+    <li><strong>Canais:</strong> cadastre canais da Kick, Twitch ou YouTube e o Visus Clipper busca os vídeos novos sozinho.</li>
+    <li><strong>Agendamento:</strong> em <strong>Acesso</strong>, ligue <strong>Rodar sozinho todo dia</strong> e escolha um horário (por exemplo, de madrugada) para ele verificar os canais e processar a fila todos os dias.</li>
+  </ul>
+
+  <h2 id="problemas"><span class="n">7</span>Problemas comuns</h2>
+  <h3>“Não consegui falar com o PC”</h3>
+  <p>O programa está desligado. Abra o atalho <strong>Visus Clipper</strong> na Área de Trabalho e espere alguns segundos.</p>
+  <h3>A biblioteca está vazia / “Google Drive desconectado”</h3>
+  <p>Dê dois cliques em <strong>Instalar.bat</strong> de novo e refaça a etapa 5 (conectar o Google Drive).</p>
+  <h3>Esqueci a senha do painel</h3>
+  <p>Abra o arquivo <em>SENHA_DO_PAINEL.txt</em> na pasta do programa. Se ele não existir mais (porque a senha foi trocada),
+    apague o arquivo <em>config\painel.json</em> e abra o painel de novo: uma nova senha é criada. Atenção: isso
+    remove também as pessoas cadastradas.</p>
+  <h3>Está muito lento</h3>
+  <p>Sem placa NVIDIA, o processamento usa só o processador e fica bem mais lento. Prefira vídeos mais curtos e deixe rodando de madrugada com o agendamento.</p>
+  <h3>Ainda com dúvida?</h3>
+  <p>Escreva para <a href="mailto:gahbruxxo@visusclipper.online">gahbruxxo@visusclipper.online</a>.</p>
+
+  <div class="acoes"><a class="btn" href="download/VisusClipper.zip">⬇ Baixar o Visus Clipper</a></div>
+</article>
+</main>
+<footer class="rodape"><p>© 2026 Visus · <a href="privacidade.html">Política de privacidade</a></p></footer>
+</body>
+</html>
