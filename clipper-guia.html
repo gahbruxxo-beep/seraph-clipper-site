@@ -96,12 +96,13 @@
   Para continuar, clique em <strong>Retomar processamento</strong>. O programa aproveita os arquivos
   concluídos e refaz a etapa interrompida. Publicações já em andamento terminam antes da pausa das próximas.</p>
 
-  <p><strong>A versão aparece como desenvolvimento?</strong>
+  <p><strong>A instalação antiga ainda não atualiza sozinha?</strong>
   <a href="download/Atualizar-Clipper.bat" download>Baixe o atualizador manual</a>,
   coloque o arquivo na mesma pasta de <strong>painel.bat</strong> e execute com dois cliques.
-  Ele preserva as configurações e guarda uma cópia do código anterior. Os posts ainda na fila aguardam temporariamente enquanto a publicação atual termina (até 20 minutos). Mantenha o atualizador e o navegador abertos até a mensagem de conclusão. Se fechar o atualizador antes disso, execute-o novamente para recuperar os horários da fila.</p>
+  Ele preserva as configurações e guarda uma cópia do código anterior. Após receber a versão com manutenção automática, o Windows poderá instalar as próximas atualizações sozinho, inclusive em instalações com Git; essa opção fica em Acesso &gt; Sistema. Os posts ainda na fila aguardam temporariamente enquanto a publicação atual termina (até 20 minutos). Mantenha o atualizador e o navegador abertos até a mensagem de conclusão. Se fechar o atualizador antes disso, execute-o novamente para recuperar os horários da fila.</p>
 
   <h2 id="publicar"><span class="n">4</span>Revisar e publicar</h2>
+  <p>O corte automático já está pronto. Se quiser ajustar, abra <strong>Ajustar início e fim</strong> na revisão e assista à prévia. A publicação usa uma cópia do trecho; o vídeo original é preservado. No Início, a conferência automática mostra indicadores e alertas por canal e categoria.</p>
   <ol>
     <li>Em <strong>Revisar</strong>, assista cada corte.</li>
     <li>Gostou? Toque em <strong>Publicar</strong>, escolha as redes e confira o texto. Não gostou? Toque em <strong>Rejeitar</strong>.</li>
@@ -143,8 +144,8 @@
   <h2 id="backup"><span class="n">7</span>Backup e atualizações</h2>
   <ul>
     <li><strong>Atualizações:</strong> o Visus Clipper confere o site a cada 6 horas e se atualiza sozinho, sem você baixar nada de novo. Em <strong>Acesso &gt; Sistema</strong> você vê a versão e pode procurar atualização na hora.</li>
-    <li><strong>Backup:</strong> dê dois cliques em <strong>configurar-backup.bat</strong> (na pasta do programa) e crie uma senha. Todo dia, às 03:30, as suas configurações, equipe, contas conectadas, fila e canais vão criptografados para o seu Google Drive (pasta VisusClipper &gt; _backup).</li>
-    <li><strong>Se trocar ou formatar o PC:</strong> instale de novo, baixe o backup mais recente do Drive e, na pasta do programa, rode <code>powershell -ExecutionPolicy Bypass -File scripts\backup.ps1 -Restaurar CAMINHO-DO-ARQUIVO</code>. Tudo volta como estava. <strong>Anote a senha</strong>: sem ela, o backup não abre.</li>
+    <li><strong>Backup:</strong> dê dois cliques em <strong>configurar-backup.bat</strong> (na pasta do programa) e crie uma senha. O painel também tenta novamente quando o backup fica atrasado e não há tarefas em andamento. Cada backup é testado, enviado e baixado novamente para conferência; a situação aparece em Acesso &gt; Sistema. Todo dia, às 03:30, as suas configurações, equipe, contas conectadas, fila e canais vão criptografados para o seu Google Drive (pasta VisusClipper &gt; _backup).</li>
+    <li><strong>Se trocar ou formatar o PC:</strong> instale de novo, baixe o backup mais recente do Drive e, na pasta do programa, rode <code>powershell -ExecutionPolicy Bypass -File scripts\backup.ps1 -Restaurar CAMINHO-DO-ARQUIVO</code>. As configurações e filas são restauradas; sessões de redes podem exigir novo login. <strong>Anote a senha</strong>: sem ela, o backup não abre.</li>
   </ul>
 
   <h2 id="problemas"><span class="n">8</span>Problemas comuns</h2>
