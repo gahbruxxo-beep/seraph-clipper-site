@@ -21,3 +21,12 @@ with ZipFile(archive) as package:
         assert not any(secret in name.lower() for secret in
                        ("painel.json", "rclone.conf", "contas.json", "senha_do_painel", ".env"))
 print("Pacote, versão, SHA-256 e caminhos conferidos.")
+
+
+# O iniciador manual fixa o hash do auxiliar que será executado no PC.
+import re
+bootstrap = (root / "download/Atualizar-Clipper.bat").read_text(encoding="utf-8")
+helper = re.search(r"download/(atualizar_instalacao_[a-f0-9]+\.py)", bootstrap).group(1)
+expected_hash = re.search(r"-ne '([a-f0-9]{64})'", bootstrap).group(1)
+assert hashlib.sha256((root / "download" / helper).read_bytes()).hexdigest() == expected_hash
+print("Atualizador manual e hash do auxiliar conferidos.")
