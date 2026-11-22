@@ -25,3 +25,14 @@ não regeneram automaticamente o ZIP.
 Para uma próxima versão de código, seguir `docs/desenvolvimento.md` na fonte e executar
 `python scripts/verificar_pacote.py` neste repositório antes de publicar.
 Não adicionar logs privados, credenciais, perfis de navegador ou bancos do usuário ao site.
+
+
+## Correção do atualizador após erro de permissão
+
+Versão 2026.11.22.212555, fonte `19ed8b077873460dde653a9ef1638347314b41e1`.
+O Windows negou acesso a um processo na tentativa do usuário. O auxiliar agora filtra
+processos Python, confirma pasta/comando do painel e impede trocar arquivos se a porta
+continuar ocupada. Quando necessário, solicita UAC padrão e espera o auxiliar terminar.
+42 testes Python aprovados; UAC real aguarda execução no PC. A instalação da versão
+anterior de autonomia não foi confirmada: a tentativa enviada pelo usuário falhou antes
+da troca do código. Histórico completo na fonte, incluindo testes e limitações.
