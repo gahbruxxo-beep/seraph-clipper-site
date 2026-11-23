@@ -56,8 +56,10 @@ o evento `change` é apenas confirmação adicional, pois o Facebook pode substi
 documento antes de a binding retornar. Cancelamentos `blob: net::ERR_ABORTED` nessa
 troca ficam apenas no diagnóstico. Somente falhas do envio real `rupload`/`upload.*` podem
 interromper o fluxo, após 30 segundos sem recuperação, nova transferência ou prévia.
-Se a troca de `/reels/create` para `/reel/<id>` criar um novo input vazio, o arquivo é
-reanexado uma vez. A prévia precisa continuar pronta por cinco verificações consecutivas,
+Se o React criar um novo input vazio, com ou sem troca de `/reels/create` para
+`/reel/<id>`, o arquivo é reanexado uma vez. A volta de uma prévia já visível para a
+mensagem de prévia vazia também aciona o reanexo, mesmo mantendo a mesma URL. A prévia
+precisa continuar pronta por cinco verificações consecutivas,
 evitando aceitar o vídeo transitório que desaparece durante a substituição do compositor.
 Os logs omitem cookies, query strings e tokens. `logs/v2.log` contém logs do serviço Windows. A
 interface independente mostra as filas; eventos detalhados estão em `/api/events`
