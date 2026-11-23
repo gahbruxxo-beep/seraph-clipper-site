@@ -49,7 +49,9 @@ o formulário pelo editor do Reel; não há um segundo `change` sobre o input de
 `RESET_BROWSER_EACH_RUN=true` limpa cookies, IndexedDB, Cache Storage e service workers antes de cada abertura do navegador Meta. **Isso perde o login e impede autonomia até autenticar novamente.** O padrão preserva a sessão em um perfil novo, sem reutilizar o IndexedDB do Business Suite. Para recuperação pontual, execute `node --env-file-if-exists=.env src/connect.js facebook --reset`.
 
 O upload espera input anexado, espera preview e não avança com percentual incompleto. O
-`setInputFiles` já dispara `input/change`; os metadados são capturados no evento original
+publicador prefere clicar em "Adicione um vídeo" e usar o evento nativo `filechooser`;
+`setInputFiles` direto é somente fallback quando o controle visível não existe. Os
+metadados são capturados no evento `change` original
 antes de o Facebook substituir o documento. Cancelamentos `blob: net::ERR_ABORTED` nessa
 troca ficam apenas no diagnóstico. Somente falhas do envio real `rupload`/`upload.*` podem
 interromper o fluxo, após 30 segundos sem recuperação, nova transferência ou prévia.
