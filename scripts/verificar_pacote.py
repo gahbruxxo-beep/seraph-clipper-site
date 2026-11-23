@@ -16,10 +16,15 @@ with ZipFile(archive) as package:
     assert origin["versao"] == manifest["versao"]
     names = package.namelist()
     assert "VisusClipper/seraph/publicar/meta_navegador.py" in names
+    assert "VisusClipper/seraph/v2/src/PublisherService.js" in names
+    assert "VisusClipper/seraph/v2/.env.example" in names
+    assert "VisusClipper/Iniciar-V2.bat" in names
+    assert not any("node_modules/" in name for name in names)
     for name in names:
         assert name.startswith("VisusClipper/") and ".." not in Path(name).parts
         assert not any(secret in name.lower() for secret in
-                       ("painel.json", "rclone.conf", "contas.json", "senha_do_painel", ".env"))
+                       ("painel.json", "rclone.conf", "contas.json", "senha_do_painel", ".env")
+                       if not (secret == ".env" and Path(name).name == ".env.example"))
 print("Pacote, versão, SHA-256 e caminhos conferidos.")
 
 
