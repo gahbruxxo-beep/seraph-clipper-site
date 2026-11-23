@@ -11,7 +11,7 @@ if not exist "%VISUS_UPDATE_ROOT%\.venv\Scripts\python.exe" (
 )
 set "VISUS_UPDATE_SCRIPT=%TEMP%\visus-atualizar-%RANDOM%-%RANDOM%.py"
 echo Baixando o atualizador...
-powershell -NoProfile -Command "$ErrorActionPreference='Stop'; [Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -UseBasicParsing -Uri 'https://visusclipper.online/download/atualizar_instalacao_6d165ccca0a627a4.py' -OutFile $env:VISUS_UPDATE_SCRIPT; if ((Get-FileHash -Algorithm SHA256 -LiteralPath $env:VISUS_UPDATE_SCRIPT).Hash -ne '6d165ccca0a627a4de65f6a9ac7a63b5d6b89722c4c037e4081fb665937ba9af') { throw 'O atualizador baixado falhou na verificacao de integridade.' }"
+powershell -NoProfile -Command "$ErrorActionPreference='Stop'; [Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -UseBasicParsing -Uri 'https://visusclipper.online/download/atualizar_instalacao_7977287bb130da13.py' -OutFile $env:VISUS_UPDATE_SCRIPT; if ((Get-FileHash -Algorithm SHA256 -LiteralPath $env:VISUS_UPDATE_SCRIPT).Hash -ne '7977287bb130da1343e56e6257de519f5e4168e95b8e912c5502f14487affd03') { throw 'O atualizador baixado falhou na verificacao de integridade.' }"
 if errorlevel 1 (
   echo Nao foi possivel baixar ou conferir o atualizador. Nenhum arquivo do programa foi alterado.
   pause
