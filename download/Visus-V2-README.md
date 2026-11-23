@@ -34,7 +34,7 @@ Facebook/Instagram precisam baixar o MP4 de uma URL HTTPS. Configure PUBLIC_BASE
 
 `PublisherService.publish(platform, videoPath, meta)` também aceita `(platform, videoPath, title, description)`. Sempre normaliza antes de tentar API. Somente falhas anteriores à etapa que pode publicar permitem fallback. Timeout depois da publicação gera `needs_review`, para conferir a rede antes de repetir; evita posts duplicados.
 
-Facebook usa `facebook.com/reels/create` e exige a identidade exata de FACEBOOK_PAGE_NAME (Visus Clips por padrão). Instagram usa `instagram.com`. Perfis separados `fb-bot-profile` e `ig-bot-profile` começam limpos e depois preservam login; extensões são bloqueadas. Workers e cache antigos são removidos antes da execução, mas a Meta pode registrar o worker novo necessário ao upload. `npm run connect:facebook` / `connect:instagram` abrem o perfil para o primeiro login. Os seletores podem exigir ajuste quando as plataformas mudarem a interface; se a Página não for confirmada, o bot para em vez de postar no perfil pessoal. YouTube/TikTok têm ponte para os conectores Playwright Python existentes, com perfis separados.
+Facebook usa `facebook.com/reels/create` e exige a identidade exata de FACEBOOK_PAGE_NAME (Visus Clips por padrão). Instagram usa `instagram.com`. Perfis separados `fb-bot-profile` e `ig-bot-profile` começam limpos e depois preservam login, cache e service workers necessários ao upload; extensões e o argumento padrão `--enable-automation` são bloqueados. A limpeza total ocorre somente com reset explícito. `npm run connect:facebook` / `connect:instagram` abrem o perfil para o primeiro login. Os seletores podem exigir ajuste quando as plataformas mudarem a interface; se a Página não for confirmada, o bot para em vez de postar no perfil pessoal. YouTube/TikTok têm ponte para os conectores Playwright Python existentes, com perfis separados.
 
 No Facebook, a identidade ativa é confirmada pelo texto do compositor da própria Página
 (por exemplo, “No que você está pensando, Visus Clips?”) ou pelo seletor explícito. Um
@@ -43,8 +43,8 @@ simples atalho para a Página não é aceito. Se o endereço direto voltar à ho
 Depois de anexar, o robô confere nome e tamanho do arquivo, acompanha a requisição de
 upload e exige uma prévia real. A mensagem “Carregue o vídeo para ver uma prévia” bloqueia
 Avançar/Publicar e gera erro seguro, anterior à publicação.
-Os metadados são capturados no evento `change` original antes de o Facebook substituir
-o formulário pelo editor do Reel; não há um segundo `change` sobre o input de miniatura.
+Os metadados locais são registrados quando o seletor Playwright entrega o arquivo; o
+evento `change` é apenas confirmação adicional antes de o Facebook substituir o formulário.
 
 `RESET_BROWSER_EACH_RUN=true` limpa cookies, IndexedDB, Cache Storage e service workers antes de cada abertura do navegador Meta. **Isso perde o login e impede autonomia até autenticar novamente.** O padrão preserva a sessão em um perfil novo, sem reutilizar o IndexedDB do Business Suite. Para recuperação pontual, execute `node --env-file-if-exists=.env src/connect.js facebook --reset`.
 
