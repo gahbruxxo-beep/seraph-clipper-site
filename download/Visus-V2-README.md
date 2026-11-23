@@ -43,6 +43,8 @@ simples atalho para a Página não é aceito. Se o endereço direto voltar à ho
 Depois de anexar, o robô confere nome e tamanho do arquivo, acompanha a requisição de
 upload e exige uma prévia real. A mensagem “Carregue o vídeo para ver uma prévia” bloqueia
 Avançar/Publicar e gera erro seguro, anterior à publicação.
+Os metadados são capturados no evento `change` original antes de o Facebook substituir
+o formulário pelo editor do Reel; não há um segundo `change` sobre o input de miniatura.
 
 `RESET_BROWSER_EACH_RUN=true` limpa cookies, IndexedDB, Cache Storage e service workers antes de cada abertura do navegador Meta. **Isso perde o login e impede autonomia até autenticar novamente.** O padrão preserva a sessão em um perfil novo, sem reutilizar o IndexedDB do Business Suite. Para recuperação pontual, execute `node --env-file-if-exists=.env src/connect.js facebook --reset`.
 
