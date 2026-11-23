@@ -48,7 +48,14 @@ o formulário pelo editor do Reel; não há um segundo `change` sobre o input de
 
 `RESET_BROWSER_EACH_RUN=true` limpa cookies, IndexedDB, Cache Storage e service workers antes de cada abertura do navegador Meta. **Isso perde o login e impede autonomia até autenticar novamente.** O padrão preserva a sessão em um perfil novo, sem reutilizar o IndexedDB do Business Suite. Para recuperação pontual, execute `node --env-file-if-exists=.env src/connect.js facebook --reset`.
 
-O upload espera input anexado, dispara change, espera preview e não avança com percentual incompleto. Falhas `rupload`/`blob:` e códigos `net::ERR_*` vão para eventos; logs omitem cookies, query strings e tokens. `logs/v2.log` contém logs do serviço Windows. A interface independente mostra as filas; eventos detalhados estão em `/api/events` (autenticado). Erros posteriores ao clique final pedem confirmação, não repetem silenciosamente.
+O upload espera input anexado, espera preview e não avança com percentual incompleto. O
+`setInputFiles` já dispara `input/change`; os metadados são capturados no evento original
+antes de o Facebook substituir o documento. Cancelamentos `blob: net::ERR_ABORTED` nessa
+troca ficam apenas no diagnóstico. Somente falhas do envio real `rupload`/`upload.*` podem
+interromper o fluxo, após 30 segundos sem recuperação, nova transferência ou prévia. Logs
+omitem cookies, query strings e tokens. `logs/v2.log` contém logs do serviço Windows. A
+interface independente mostra as filas; eventos detalhados estão em `/api/events`
+(autenticado). Erros posteriores ao clique final pedem confirmação, não repetem silenciosamente.
 
 ## Fluxo e dados
 
