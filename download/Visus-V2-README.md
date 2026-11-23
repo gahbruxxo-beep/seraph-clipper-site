@@ -36,6 +36,11 @@ Facebook/Instagram precisam baixar o MP4 de uma URL HTTPS. Configure PUBLIC_BASE
 
 Facebook usa `facebook.com/reels/create` e exige a identidade exata de FACEBOOK_PAGE_NAME (Visus Clips por padrão). Instagram usa `instagram.com`. Perfis separados `fb-bot-profile` e `ig-bot-profile` começam limpos e depois preservam login; extensões e service workers são bloqueados. `npm run connect:facebook` / `connect:instagram` abrem o perfil para o primeiro login. Os seletores podem exigir ajuste quando as plataformas mudarem a interface; se a Página não for confirmada, o bot para em vez de postar no perfil pessoal. YouTube/TikTok têm ponte para os conectores Playwright Python existentes, com perfis separados.
 
+No Facebook, a identidade ativa é confirmada pelo texto do compositor da própria Página
+(por exemplo, “No que você está pensando, Visus Clips?”) ou pelo seletor explícito. Um
+simples atalho para a Página não é aceito. Se o endereço direto voltar à home, o robô usa
+“Criar reel” e só aceita o input de arquivo depois de confirmar o compositor de Reels.
+
 `RESET_BROWSER_EACH_RUN=true` limpa cookies, IndexedDB, Cache Storage e service workers antes de cada abertura do navegador Meta. **Isso perde o login e impede autonomia até autenticar novamente.** O padrão preserva a sessão em um perfil novo, sem reutilizar o IndexedDB do Business Suite. Para recuperação pontual, execute `node --env-file-if-exists=.env src/connect.js facebook --reset`.
 
 O upload espera input anexado, dispara change, espera preview e não avança com percentual incompleto. Falhas `rupload`/`blob:` e códigos `net::ERR_*` vão para eventos; logs omitem cookies, query strings e tokens. `logs/v2.log` contém logs do serviço Windows. A interface independente mostra as filas; eventos detalhados estão em `/api/events` (autenticado). Erros posteriores ao clique final pedem confirmação, não repetem silenciosamente.
