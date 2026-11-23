@@ -52,8 +52,11 @@ O upload espera input anexado, espera preview e não avança com percentual inco
 `setInputFiles` já dispara `input/change`; os metadados são capturados no evento original
 antes de o Facebook substituir o documento. Cancelamentos `blob: net::ERR_ABORTED` nessa
 troca ficam apenas no diagnóstico. Somente falhas do envio real `rupload`/`upload.*` podem
-interromper o fluxo, após 30 segundos sem recuperação, nova transferência ou prévia. Logs
-omitem cookies, query strings e tokens. `logs/v2.log` contém logs do serviço Windows. A
+interromper o fluxo, após 30 segundos sem recuperação, nova transferência ou prévia.
+Se a troca de `/reels/create` para `/reel/<id>` criar um novo input vazio, o arquivo é
+reanexado uma vez. A prévia precisa continuar pronta por cinco verificações consecutivas,
+evitando aceitar o vídeo transitório que desaparece durante a substituição do compositor.
+Os logs omitem cookies, query strings e tokens. `logs/v2.log` contém logs do serviço Windows. A
 interface independente mostra as filas; eventos detalhados estão em `/api/events`
 (autenticado). Erros posteriores ao clique final pedem confirmação, não repetem silenciosamente.
 
