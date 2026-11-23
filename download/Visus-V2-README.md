@@ -51,8 +51,9 @@ o formulário pelo editor do Reel; não há um segundo `change` sobre o input de
 O upload espera input anexado, espera preview e não avança com percentual incompleto. O
 publicador prefere clicar em "Adicione um vídeo" e usar o evento nativo `filechooser`;
 `setInputFiles` direto é somente fallback quando o controle visível não existe. Os
-metadados são capturados no evento `change` original
-antes de o Facebook substituir o documento. Cancelamentos `blob: net::ERR_ABORTED` nessa
+metadados locais são registrados assim que o Playwright entrega o arquivo sem exceção;
+o evento `change` é apenas confirmação adicional, pois o Facebook pode substituir o
+documento antes de a binding retornar. Cancelamentos `blob: net::ERR_ABORTED` nessa
 troca ficam apenas no diagnóstico. Somente falhas do envio real `rupload`/`upload.*` podem
 interromper o fluxo, após 30 segundos sem recuperação, nova transferência ou prévia.
 Se a troca de `/reels/create` para `/reel/<id>` criar um novo input vazio, o arquivo é
