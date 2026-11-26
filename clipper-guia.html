@@ -106,14 +106,29 @@
   <ol>
     <li>Em <strong>Revisar</strong>, assista cada corte.</li>
     <li>Gostou? Toque em <strong>Publicar</strong>, escolha as redes e confira o texto. Não gostou? Toque em <strong>Rejeitar</strong>.</li>
-    <li>Para publicar sozinho, conecte suas contas em <strong>Contas</strong> (TikTok, YouTube, Instagram e Facebook). O próprio painel explica cada passo.</li>
-    <li>Prefere postar à mão? Use <strong>Baixar</strong> e <strong>Copiar legenda</strong>.</li>
+    <li><strong>TikTok e YouTube publicam sozinhos:</strong> conecte essas contas em <strong>Contas</strong>. O próprio painel explica cada passo.</li>
+    <li><strong>Instagram, Facebook e Kwai são manuais:</strong> use <strong>Baixar</strong> e <strong>Copiar legenda</strong> e poste pelo aplicativo da rede. Assim a sua conta não corre risco de bloqueio.</li>
   </ol>
-  <p>Se o envio ao Instagram ou Facebook ficar parado, o programa detecta a falta de progresso e faz
-  uma nova tentativa antes de publicar. Se pedir sua ajuda, confira a conexão e a conta no Business Suite.
-  Quando houver dúvida se o vídeo já saiu, confira a rede antes de clicar em <strong>Tentar de novo</strong>.</p>
-  <p>Para liberar espaço, em <strong>Clipes</strong> use <strong>Limpar rejeitados</strong> ou exclua cortes e vídeos.
-    Tudo vai para a lixeira do Google Drive e pode ser recuperado por 30 dias.</p>
+  <table class="tabela">
+    <tr><th>Rede</th><th>Como publica</th><th>Texto</th></tr>
+    <tr><td>TikTok</td><td>Sozinho, pelo painel</td><td>Legenda</td></tr>
+    <tr><td>YouTube</td><td>Sozinho, pelo painel</td><td>Título e descrição</td></tr>
+    <tr><td>Instagram</td><td>Manual: Baixar + Copiar legenda</td><td>Legenda</td></tr>
+    <tr><td>Facebook</td><td>Manual: Baixar + Copiar legenda</td><td>Legenda</td></tr>
+    <tr><td>Kwai</td><td>Manual: Baixar + Copiar legenda</td><td>Legenda</td></tr>
+  </table>
+  <p>O campo de <strong>título</strong> só aparece para o YouTube. Nas outras redes, o painel abre direto a legenda.</p>
+  <p><strong>Instagram e Facebook automáticos</strong> só funcionam com a API oficial da Meta configurada.
+    Isso é uma opção avançada, para quem já tem um aplicativo aprovado pela Meta. Sem ela, essas redes ficam sempre manuais.</p>
+  <p>Se a publicação no TikTok ou no YouTube der erro, o programa tenta de novo sozinho algumas vezes antes de avisar.
+    Quando houver dúvida se o vídeo já saiu, confira a rede antes de clicar em <strong>Tentar de novo</strong>.</p>
+  <p><strong>Limite do YouTube:</strong> o YouTube só aceita alguns envios por dia em cada canal. Quando o limite acaba,
+    o painel avisa e continua no dia seguinte. Para aumentar o limite, confirme o seu canal em
+    <a href="https://www.youtube.com/verify" target="_blank" rel="noopener">youtube.com/verify</a>.</p>
+  <p><strong>Rejeitar e excluir:</strong> um corte rejeitado é apagado de vez 2 minutos depois, para liberar espaço.
+    Até lá, toque em <strong>Desfazer</strong> no aviso que aparece. Depois disso não há como recuperar.
+    Já ao <strong>excluir</strong> um corte ou vídeo em <strong>Clipes</strong>, ele vai para a lixeira do seu Google Drive
+    e pode ser recuperado por 30 dias.</p>
 
   <h2 id="equipe"><span class="n">5</span>Acesso para a equipe</h2>
   <p>Você pode liberar o painel para outras pessoas, cada uma com o próprio login e um cargo:</p>
@@ -144,15 +159,17 @@
   <h2 id="backup"><span class="n">7</span>Backup e atualizações</h2>
   <ul>
     <li><strong>Atualizações:</strong> o Visus Clipper confere o site a cada 6 horas e se atualiza sozinho, sem você baixar nada de novo. Em <strong>Acesso &gt; Sistema</strong> você vê a versão e pode procurar atualização na hora.</li>
-    <li><strong>Backup:</strong> dê dois cliques em <strong>configurar-backup.bat</strong> (na pasta do programa) e crie uma senha. O painel também tenta novamente quando o backup fica atrasado e não há tarefas em andamento. Cada backup é testado, enviado e baixado novamente para conferência; a situação aparece em Acesso &gt; Sistema. Todo dia, às 03:30, as suas configurações, equipe, contas conectadas, fila e canais vão criptografados para o seu Google Drive (pasta VisusClipper &gt; _backup).</li>
-    <li><strong>Se trocar ou formatar o PC:</strong> instale de novo, baixe o backup mais recente do Drive e, na pasta do programa, rode <code>powershell -ExecutionPolicy Bypass -File scripts\backup.ps1 -Restaurar CAMINHO-DO-ARQUIVO</code>. As configurações e filas são restauradas; sessões de redes podem exigir novo login. <strong>Anote a senha</strong>: sem ela, o backup não abre.</li>
+    <li><strong>Backup:</strong> dê dois cliques em <strong>configurar-backup.bat</strong> (na pasta do programa) e crie uma senha. Todo dia, de madrugada, as suas configurações, equipe, contas conectadas, fila e canais vão protegidos por senha para o seu Google Drive (pasta VisusClipper &gt; _backup). O backup fica <strong>só no Drive</strong>: nada fica guardado no PC. Os backups mais antigos são apagados sozinhos, ficam só os mais recentes. Se um backup atrasar, o painel tenta de novo quando o PC estiver livre; a situação aparece em Acesso &gt; Sistema.</li>
+    <li><strong>Espaço no disco:</strong> o PC guarda só o essencial. Depois que um corte chega inteiro ao Drive, a cópia do PC é apagada, e o programa limpa sozinho arquivos temporários e vídeos já processados.</li>
+    <li><strong>Se trocar ou formatar o PC:</strong> instale de novo, conecte o mesmo Google Drive e dê dois cliques em <strong>Restaurar-backup.bat</strong> (na pasta do programa). Ele busca o backup no Drive e pede a senha. As configurações e filas voltam; as redes podem pedir login de novo. <strong>Anote a senha</strong>: sem ela, o backup não abre.</li>
   </ul>
 
   <h2 id="problemas"><span class="n">8</span>Problemas comuns</h2>
   <h3>“Não consegui falar com o PC”</h3>
   <p>O programa está desligado. Abra o atalho <strong>Visus Clipper</strong> na Área de Trabalho e espere alguns segundos.</p>
   <h3>A biblioteca está vazia / “Google Drive desconectado”</h3>
-  <p>Dê dois cliques em <strong>Instalar.bat</strong> de novo e refaça a etapa 5 (conectar o Google Drive).</p>
+  <p>Use o botão de <strong>reconectar o Google Drive</strong> que aparece no painel, ou dê dois cliques em
+    <strong>Instalar.bat</strong> de novo e refaça a etapa 5 (conectar o Google Drive). Nada do que já está no Drive é perdido.</p>
   <h3>Esqueci a senha do painel</h3>
   <p>Abra o arquivo <em>SENHA_DO_PAINEL.txt</em> na pasta do programa. Se ele não existir mais (porque a senha foi trocada),
     apague o arquivo <em>config\painel.json</em> e abra o painel de novo: uma nova senha é criada. Atenção: isso
@@ -160,16 +177,19 @@
   <h3>Está muito lento</h3>
   <p>Sem placa NVIDIA, o processamento usa só o processador e fica bem mais lento. Prefira vídeos mais curtos e deixe rodando de madrugada com o agendamento.</p>
   <h3>Ainda com dúvida?</h3>
-  <p>Escreva para <a href="mailto:gahbruxxo@visusclipper.online">gahbruxxo@visusclipper.online</a>.</p>
+  <p>Escreva para <a href="mailto:visusclips@visusclipper.online">visusclips@visusclipper.online</a>.</p>
 
   <div class="acoes"><a class="btn" href="download/VisusClipper.zip">⬇ Baixar o Visus Clipper</a></div>
 </article>
 
-<section id="v2">
-<h2>V2: lives automáticas e APIs oficiais</h2>
-<p>A atualização inclui conversão obrigatória para H.264/AAC e o serviço V2. Para ativar a captura automática, execute <strong>Iniciar-V2.bat</strong> na pasta instalada, configure as credenciais em <code>seraph/v2/.env</code> e conecte os canais YouTube/Twitch pelo painel.</p>
-<p>A V2 tenta publicar pelas APIs oficiais antes do navegador. A configuração inicial dos aplicativos e permissões é necessária; Instagram/Facebook também precisam de uma URL HTTPS de mídia encaminhada ao serviço V2. YouTube é privado e TikTok é SELF_ONLY por padrão.</p>
-<p><a href="download/Visus-V2-README.md">Guia completo da V2 e configuração das contas</a>. Os testes locais usam APIs simuladas; a validação com suas contas ocorre após a configuração. Não há migração automática dos posts antigos.</p>
+<section id="v2" class="guia" style="padding-top:0">
+<div class="card">
+<strong>Avançado e opcional: V2 (gravação automática de lives)</strong>
+<p>A V2 vem <strong>desligada</strong> e <strong>não é necessária</strong> para usar o Visus Clipper: a fila e os canais
+  já baixam, cortam e publicam tudo. Ela é só para quem tem experiência técnica e quer criar os próprios aplicativos
+  no Google e na Twitch. Mesmo ligada, a V2 nunca publica no Instagram, no Facebook ou no Kwai pelo navegador.</p>
+<p><a href="download/Visus-V2-README.md">Guia técnico da V2</a> (só para usuários avançados).</p>
+</div>
 </section>
 </main>
 <footer class="rodape"><p>© 2026 Visus · <a href="privacidade.html">Política de privacidade</a></p></footer>

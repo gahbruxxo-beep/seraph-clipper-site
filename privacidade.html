@@ -21,8 +21,8 @@ utiliza ferramentas de rastreamento ou análise de visitantes. Os downloads e li
 <p>O Visus Clipper é instalado no computador de cada usuário, e o painel roda nesse mesmo computador.
 Os dados de login (e-mail, nome, foto do perfil quando o login é feito com o Google, e senhas guardadas de forma
 cifrada) servem apenas para liberar o acesso, exibir quem está conectado e registrar quem aprovou cada corte.
-Eles ficam somente no computador onde o programa está instalado e não são enviados aos criadores do Visus Clipper
-nem a terceiros. A sessão é mantida por um cookie de login, necessário para o funcionamento do painel.</p>
+Eles ficam no computador onde o programa está instalado e não são enviados aos criadores do Visus Clipper
+nem a terceiros (veja a exceção do backup abaixo). A sessão é mantida por um cookie de login, necessário para o funcionamento do painel.</p>
 
 <h2>Google Drive</h2>
 <p>O Visus Clipper usa a permissão <code>https://www.googleapis.com/auth/drive.file</code> do Google Drive.
@@ -34,12 +34,22 @@ Com ela, o app só consegue ver, criar e alterar os arquivos e pastas que <stron
 <li>Os cortes gerados são enviados ao Google Drive de quem instalou o programa e exibidos no painel às pessoas autorizadas por essa pessoa.</li>
 <li>Após confirmar que os arquivos chegaram íntegros ao Drive, as cópias temporárias do computador são apagadas.</li>
 <li>Cortes podem ser excluídos pelo painel; nesse caso, vão para a lixeira do Google Drive.</li>
+<li>Cortes rejeitados na revisão são apagados de vez, do Drive e do computador, 2 minutos depois da rejeição. Até lá, a rejeição pode ser desfeita.</li>
 <li>Nenhum dado é vendido, compartilhado, usado para publicidade ou para treinar modelos de inteligência artificial.</li>
 </ul>
 
 <h2>Redes sociais</h2>
-<p>Quando contas de redes sociais são conectadas para publicação automática, as credenciais de acesso ficam
-somente no computador onde o programa está instalado e são usadas apenas para publicar os cortes aprovados.</p>
+<p>O TikTok e o YouTube podem ser conectados para publicação automática. Nesse caso, o acesso a essas contas fica
+no computador onde o programa está instalado e é usado apenas para publicar os cortes aprovados.
+Instagram, Facebook e Kwai são publicados manualmente pelo próprio usuário (o painel só oferece o vídeo e a legenda),
+a não ser que o usuário configure por conta própria a API oficial da Meta.</p>
+
+<h2>Backup no Google Drive</h2>
+<p>Se o usuário ligar o backup, as configurações do painel, as pessoas cadastradas, as contas conectadas, as sessões
+de login das redes, a fila e os canais são enviados para a pasta <em>VisusClipper &gt; _backup</em> do
+<strong>próprio Google Drive do usuário</strong>. O arquivo vai criptografado (AES-256) com uma senha que só o usuário conhece;
+nem os criadores do Visus Clipper conseguem abri-lo. Nenhuma cópia do backup fica no computador, e os backups mais antigos
+são apagados automaticamente.</p>
 
 <h2>Revogação e exclusão</h2>
 <p>O acesso do Visus Clipper à sua conta Google pode ser revogado a qualquer momento em
@@ -52,7 +62,7 @@ Os dados de login podem ser apagados a qualquer momento pelo dono do painel, em 
 incluindo os requisitos de Uso Limitado.</p>
 
 <h2>Contato</h2>
-<p><a href="mailto:gahbruxxo@visusclipper.online">gahbruxxo@visusclipper.online</a></p>
+<p><a href="mailto:visusclips@visusclipper.online">visusclips@visusclipper.online</a></p>
 
 <footer><a href="index.html">Todos os projetos</a> · © 2026 Visus</footer>
 </main>
