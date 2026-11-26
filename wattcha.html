@@ -39,7 +39,7 @@
   <p class="lead">Descubra quanto o seu computador gasta de energia, em reais, e deixe-o mais rápido e limpo,
     tudo em um único programa leve e fácil de usar.</p>
   <div class="acoes">
-    <a class="btn" href="wattcha/Wattcha-Instalador.exe">⬇ Baixar o Wattcha <small>Windows 10 e 11 · cerca de 200 KB · versão 1.0.3</small></a>
+    <a class="btn" href="wattcha/Wattcha-Instalador.exe">⬇ Baixar o Wattcha <small>Windows 10 e 11 · cerca de 200 KB · versão 1.0.4</small></a>
   </div>
 
   <h2>Para que serve</h2>
@@ -76,10 +76,22 @@
     <li>Clique em <strong>Baixar o Wattcha</strong>. Se o navegador perguntar, escolha <strong>Manter</strong>.</li>
     <li>Abra o arquivo baixado, <strong>Wattcha-Instalador.exe</strong>.</li>
     <li>Se aparecer a tela azul “O Windows protegeu o computador”, clique em <strong>Mais informações</strong> e depois em
-      <strong>Executar assim mesmo</strong>. Isso acontece com programas novos que ainda não são conhecidos pelo Windows.</li>
+      <strong>Executar assim mesmo</strong> (veja o quadro abaixo).</li>
     <li>Escolha se quer um atalho na Área de Trabalho. O Wattcha abre sozinho e já fica no Menu Iniciar.</li>
     <li>Na primeira tela, confira o preço do kWh. Pronto: ele já está medindo.</li>
   </ol>
+  <div class="card" id="smartscreen"><strong>Sobre o aviso azul do Windows (SmartScreen)</strong>
+    <p>Na primeira vez, o Windows pode mostrar a tela azul <strong>“O Windows protegeu o computador”</strong>, com só
+      o botão <strong>Não executar</strong>. Isso não quer dizer que foi encontrado vírus: é o filtro SmartScreen
+      avisando que o programa é novo e ainda não tem um certificado digital pago, então o Windows ainda não o conhece.</p>
+    <ol>
+      <li>Na tela azul, clique no texto <strong>Mais informações</strong> (fica logo abaixo da mensagem).</li>
+      <li>Aparece o nome do arquivo, <strong>Wattcha-Instalador.exe</strong>, e um botão novo: <strong>Executar assim mesmo</strong>.</li>
+      <li>Clique em <strong>Executar assim mesmo</strong>. A instalação continua normalmente.</li>
+    </ol>
+    <p>Isso só acontece na instalação. Depois, as atualizações chegam sozinhas e cada uma é conferida com uma assinatura
+      digital do Wattcha antes de ser instalada; se a conferência falhar, nada é trocado. Baixe sempre por esta página.</p>
+  </div>
   <p>Não é preciso ser administrador para instalar. Algumas funções (modos de desempenho, hibernação e limpeza
     agressiva) pedem permissão de administrador na hora de usar; o próprio programa mostra o botão para isso.</p>
 
@@ -93,9 +105,10 @@
 
   <h2>Perguntas frequentes</h2>
   <h3>É seguro? Por que o Windows avisa?</h3>
-  <p>O Windows avisa em qualquer programa novo que ainda não tem uma assinatura digital paga. O Wattcha não instala
-    nada escondido, só usa a internet para conferir se há versão nova (e confere a integridade de cada atualização
-    antes de instalar) e guarda os seus dados apenas no seu computador.</p>
+  <p>O Windows avisa em qualquer programa novo que ainda não tem um certificado digital pago
+    (veja <a href="#smartscreen">como passar pelo aviso</a>). O Wattcha não instala nada escondido, só usa a internet
+    para conferir se há versão nova (cada atualização vem com uma assinatura digital, conferida antes de instalar)
+    e guarda os seus dados apenas no seu computador.</p>
   <h3>Muda alguma coisa no meu PC sem eu pedir?</h3>
   <p>Não. Modo de desempenho, limpeza e hibernação só mudam o que você escolher e confirmar. Os modos têm botão para voltar como estava.</p>
   <h3>Como desinstalar?</h3>

@@ -9,8 +9,12 @@
 # ============================================================
 param([switch]$Segundo, [switch]$AguardarFechar, [switch]$Medir)
 $ErrorActionPreference = 'SilentlyContinue'
-$VersaoApp = '1.0.3'
+$VersaoApp = '1.0.4'
 $UrlsBase = @('https://visusclipper.online/wattcha/', 'https://gahbruxxo-beep.github.io/seraph-clipper-site/wattcha/')
+# Chave PUBLICA que confere as atualizacoes. So quem tem a chave privada (guardada fora do site) consegue assinar.
+# O campo "assinatura" do versao.json e RSA-SHA256 (PKCS#1 v1.5) feito sobre os bytes do proprio Wattcha.ps1 novo, em base64.
+$ChavePublicaAtu = '<RSAKeyValue><Modulus>vNBvEKnpWA6LL8cpVKJVDsHzcGEXhfVEwAFE2wLLS2blbXt6YHYHY/dk3k67+q4Gas3Ce+SxScSDe3ymRkMOeQ3t/OeQGEOC2wcRq9lCgA/PjYpKqm+ewQ9+Gvd08o78fDRFVPvmhy0Lik2WCWcqZX4jdrl744xqFSedvzrK0i+rWg9Am9wakrGkFwF2R+PEQozSaIgwVyU6usE1kOFA4eri0TCfDOEijTOshCBgq3Ojkx7RqdMCmDZNGuQ6etzfzK+Y3cXWnT0s3eHjto3MqPXALHLwABtXaXpX3UR7tk3Cs1Ltgaa+WKJop1sGbIydOQbe4/L3M6Bn36g1qcqApCa6+RJPMXb6QBAgeq24XdKjY+0Sx4DVdSwyMzf1t5EzrmZ4g3h2amxmi+MbgAXE414yFEdf6xVmQMDq983UP09ksvpAF71sDaSqUE2ssUnVaZRr2vl6iOM0xM/yadzSg3C0VYNs5SWYiaM3kTM9UIcRyMc1c2cbn3Fl0KtkI49t</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>'
+$SegundosPorEndereco = 30   # tempo maximo esperando cada endereco antes de tentar o proximo
 $script:idxBase = 0
 $script:baseOk = $null
 Add-Type -AssemblyName System.Windows.Forms
@@ -616,13 +620,15 @@ $bLimpar.Add_Click({
 $p4 = $paginas[3]
 $script:pai = $p4
 
+$script:TarefasHib = @('Wattcha-Hibernar', 'Wattcha-Acordar')
 function HibLigada {
     $v = (Get-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Power' -Name HibernateEnabled -ErrorAction SilentlyContinue).HibernateEnabled
     return ($v -eq 1)
 }
 function TextoHorarios {
     $txt = ''
-    foreach ($t in @(Get-ScheduledTask -TaskName 'Wattcha-*' -ErrorAction SilentlyContinue)) {
+    # so as 2 tarefas da hibernacao (nunca 'Wattcha-*', que pegaria tambem a 'Wattcha-Iniciar')
+    foreach ($t in @(Get-ScheduledTask -TaskName $script:TarefasHib -ErrorAction SilentlyContinue)) {
         $hh = ''
         $sb = $null; if ($t.Triggers -and $t.Triggers.Count -gt 0) { $sb = $t.Triggers[0].StartBoundary }
         if ($sb) { try { $hh = ([datetime]$sb).ToString('HH:mm') } catch {} }
@@ -644,8 +650,11 @@ function ExigeAdmin {
     return $false
 }
 function RemoverTarefas {
-    foreach ($t in @(Get-ScheduledTask -TaskName 'Wattcha-*' -ErrorAction SilentlyContinue)) {
-        Unregister-ScheduledTask -TaskName $t.TaskName -Confirm:$false -ErrorAction SilentlyContinue
+    # apaga so as tarefas da hibernacao; a 'Wattcha-Iniciar' (abrir com o Windows) fica
+    foreach ($nome in $script:TarefasHib) {
+        if (Get-ScheduledTask -TaskName $nome -ErrorAction SilentlyContinue) {
+            Unregister-ScheduledTask -TaskName $nome -Confirm:$false -ErrorAction SilentlyContinue
+        }
     }
 }
 function HoraValida($t) {
@@ -873,6 +882,7 @@ $script:pai = $p5
 
 $script:atuEstado = 'ocioso'
 $script:tarefaAtu = $null; $script:wcAtu = $null; $script:atuInicio = $null; $script:atuInfo = $null; $script:atuManual = $false
+$script:basesBaixa = @($UrlsBase); $script:idxBaixa = 0
 
 function NovoWebClient {
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
@@ -888,10 +898,67 @@ function FimAtu($msg, $cor) {
         if ($cor -eq 'aviso') { $script:lAtuRes.ForeColor = $script:amarelo } else { $script:lAtuRes.ForeColor = $script:verde }
     }
 }
+# anota em %LOCALAPPDATA%\Wattcha\atualizacao.log o que aconteceu com as atualizacoes (para entender problemas depois)
+function RegistrarAtu($msg) {
+    try {
+        $arq = Join-Path $script:pastaDados 'atualizacao.log'
+        if ((Test-Path $arq) -and (Get-Item $arq).Length -gt 200KB) { Move-Item -Path $arq -Destination ($arq + '.antigo') -Force }
+        Add-Content -Path $arq -Value ((Get-Date).ToString('yyyy-MM-dd HH:mm:ss') + '  v' + $script:VersaoApp + '  ' + $msg) -Encoding UTF8
+    } catch {}
+}
+# confere a assinatura RSA-SHA256 (PKCS#1 v1.5) dos bytes do arquivo com a chave publica embutida
+function AssinaturaValida($bytes, $assinaturaB64) {
+    if (-not $bytes -or [string]::IsNullOrWhiteSpace('' + $assinaturaB64)) { return $false }
+    $rsa = $null
+    try {
+        $assin = [Convert]::FromBase64String(('' + $assinaturaB64).Trim())
+        $rsa = New-Object Security.Cryptography.RSACryptoServiceProvider
+        $rsa.FromXmlString($script:ChavePublicaAtu)
+        return [bool]$rsa.VerifyData([byte[]]$bytes, $assin, [Security.Cryptography.HashAlgorithmName]::SHA256, [Security.Cryptography.RSASignaturePadding]::Pkcs1)
+    } catch { return $false }
+    finally { if ($rsa) { $rsa.Dispose() } }
+}
+# devolve '' se o arquivo baixado pode ser instalado, ou o motivo de recusar
+function ConferirAtualizacao($bytes, $info) {
+    if (-not $bytes -or $bytes.Length -lt 100) { return 'arquivo baixado vazio' }
+    $sha = [BitConverter]::ToString([Security.Cryptography.SHA256]::Create().ComputeHash([byte[]]$bytes)).Replace('-', '').ToLower()
+    if ($sha -ne ('' + $info.sha256).ToLower()) { return 'sha256 diferente do versao.json' }
+    if ([string]::IsNullOrWhiteSpace('' + $info.assinatura)) { return 'versao.json sem assinatura' }
+    if (-not (AssinaturaValida $bytes $info.assinatura)) { return 'assinatura invalida para a chave do programa' }
+    $texto = [Text.Encoding]::UTF8.GetString([byte[]]$bytes).TrimStart([char]0xFEFF)
+    $tk = $null; $er = $null
+    [void][Management.Automation.Language.Parser]::ParseInput($texto, [ref]$tk, [ref]$er)
+    if ($er.Count -gt 0) { return 'arquivo com erro de sintaxe' }
+    $padrao = '\$VersaoApp = ''' + [regex]::Escape('' + $info.versao) + ''''
+    if ($texto -notmatch $padrao) { return 'versao dentro do arquivo nao bate com o versao.json' }
+    return ''
+}
 function PedirVersao {
     $script:wcAtu = NovoWebClient
     $script:tarefaAtu = $script:wcAtu.DownloadStringTaskAsync([Uri]($script:UrlsBase[$script:idxBase] + 'versao.json?t=' + [DateTime]::UtcNow.Ticks))
     $script:atuInicio = Get-Date
+}
+function PedirArquivo {
+    $script:wcAtu = NovoWebClient
+    $script:tarefaAtu = $script:wcAtu.DownloadDataTaskAsync([Uri]($script:basesBaixa[$script:idxBaixa] + 'Wattcha.ps1?t=' + [DateTime]::UtcNow.Ticks))
+    $script:atuInicio = Get-Date
+}
+# passa para o proximo endereco da lista; devolve $false se ja tentou todos
+function TentarProximoEndereco {
+    for ($i = 0; $i -lt 5; $i++) {
+        try {
+            if ($script:atuEstado -eq 'verificando') {
+                if ($script:idxBase -ge ($script:UrlsBase.Count - 1)) { return $false }
+                $script:idxBase++; PedirVersao; return $true
+            }
+            if ($script:atuEstado -eq 'baixando') {
+                if ($script:idxBaixa -ge ($script:basesBaixa.Count - 1)) { return $false }
+                $script:idxBaixa++; PedirArquivo; return $true
+            }
+            return $false
+        } catch { RegistrarAtu ('erro ao pedir o proximo endereco: ' + $_.Exception.Message) }
+    }
+    return $false
 }
 function ChecarAtualizacao($manual) {
     if ($script:atuEstado -ne 'ocioso') { return }
@@ -900,17 +967,18 @@ function ChecarAtualizacao($manual) {
     $script:idxBase = 0; $script:baseOk = $null
     if ($manual) { $script:lAtuRes.ForeColor = $script:suave; $script:lAtuRes.Text = 'Verificando...' }
     try { PedirVersao }
-    catch { $script:atuEstado = 'ocioso'; if ($manual) { FimAtu 'Sem internet agora.' 'aviso' } }
+    catch { if (-not (TentarProximoEndereco)) { FimAtu 'Sem internet agora.' 'aviso' } }
 }
 function BaixarAtualizacao {
     if ($script:atuEstado -ne 'ocioso' -or -not $script:atuInfo) { return }
     $script:atuEstado = 'baixando'; $script:atuInicio = Get-Date
     $script:atuManual = $true
     $script:lAtuRes.ForeColor = $script:suave; $script:lAtuRes.Text = 'Baixando a versao ' + $script:atuInfo.versao + '...'
-    try {
-        $script:wcAtu = NovoWebClient
-        $script:tarefaAtu = $script:wcAtu.DownloadDataTaskAsync([Uri]($script:baseOk + 'Wattcha.ps1?t=' + [DateTime]::UtcNow.Ticks))
-    } catch { $script:atuEstado = 'ocioso'; FimAtu 'Nao consegui baixar. Tente de novo mais tarde.' 'aviso' }
+    # primeiro o endereco que respondeu o versao.json, depois os outros
+    $script:basesBaixa = @($script:baseOk) + @($script:UrlsBase | Where-Object { $_ -ne $script:baseOk })
+    $script:idxBaixa = 0
+    try { PedirArquivo }
+    catch { if (-not (TentarProximoEndereco)) { FimAtu 'Nao consegui baixar. Tente de novo mais tarde.' 'aviso' } }
 }
 function Reiniciar {
     $linha = '-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File "' + $PSCommandPath + '" -AguardarFechar'
@@ -925,17 +993,17 @@ function Reiniciar {
 function AplicarAtualizacao($bytes) {
     $info = $script:atuInfo
     try {
-        $sha = [BitConverter]::ToString([Security.Cryptography.SHA256]::Create().ComputeHash($bytes)).Replace('-', '').ToLower()
-        if ($sha -ne ('' + $info.sha256).ToLower()) { FimAtu 'O arquivo baixado veio diferente do esperado. Nada foi trocado.' 'aviso'; return }
-        $texto = [Text.Encoding]::UTF8.GetString($bytes).TrimStart([char]0xFEFF)
-        $tk = $null; $er = $null
-        [void][Management.Automation.Language.Parser]::ParseInput($texto, [ref]$tk, [ref]$er)
-        $padrao = '\$VersaoApp = ''' + [regex]::Escape('' + $info.versao) + ''''
-        if ($er.Count -gt 0 -or $texto -notmatch $padrao) { FimAtu 'A atualizacao veio com defeito. Nada foi trocado.' 'aviso'; return }
+        $motivo = ConferirAtualizacao $bytes $info
+        if ($motivo) {
+            RegistrarAtu ('versao ' + $info.versao + ' RECUSADA: ' + $motivo + ' (baixada de ' + $script:basesBaixa[$script:idxBaixa] + ')')
+            FimAtu ('A atualizacao nao passou na conferencia de seguranca (' + $motivo + '). Nada foi trocado.') 'aviso'
+            return
+        }
         $dest = $PSCommandPath
         Copy-Item -Path $dest -Destination ($dest + '.bak') -Force -ErrorAction SilentlyContinue
         [IO.File]::WriteAllBytes($dest, $bytes)
-    } catch { FimAtu ('Nao consegui instalar a atualizacao: ' + $_.Exception.Message) 'aviso'; return }
+    } catch { RegistrarAtu ('erro ao instalar: ' + $_.Exception.Message); FimAtu ('Nao consegui instalar a atualizacao: ' + $_.Exception.Message) 'aviso'; return }
+    RegistrarAtu ('atualizado para a versao ' + $info.versao + ' (assinatura conferida)')
     $script:atuEstado = 'ocioso'; $script:atuInfo = $null
     $script:bAtu.Text = 'VERIFICAR AGORA'
     $script:abaBtn[4].Text = 'AJUSTES'
@@ -953,18 +1021,21 @@ $tAtu.Add_Tick({
     if ($script:atuEstado -eq 'ocioso') { return }
     $t = $script:tarefaAtu
     if (-not $t) { $script:atuEstado = 'ocioso'; return }
-    if (((Get-Date) - $script:atuInicio).TotalSeconds -gt 90) {
+    $ondeAgora = $script:UrlsBase[$script:idxBase]
+    if ($script:atuEstado -eq 'baixando') { $ondeAgora = $script:basesBaixa[$script:idxBaixa] }
+    if (-not $t.IsCompleted -and ((Get-Date) - $script:atuInicio).TotalSeconds -gt $script:SegundosPorEndereco) {
+        # esse endereco demorou demais: larga ele e tenta o proximo antes de desistir
         try { $script:wcAtu.CancelAsync() } catch {}
+        RegistrarAtu ($script:atuEstado + ': sem resposta em ' + $script:SegundosPorEndereco + ' s de ' + $ondeAgora)
+        if (TentarProximoEndereco) { return }
         FimAtu 'O servidor nao respondeu. Tente de novo mais tarde.' 'aviso'
         return
     }
     if (-not $t.IsCompleted) { return }
-    if (($t.IsFaulted -or $t.IsCanceled) -and $script:atuEstado -eq 'verificando' -and $script:idxBase -lt ($script:UrlsBase.Count - 1)) {
-        $script:idxBase++
-        try { PedirVersao } catch { FimAtu 'Nao consegui verificar agora (sem internet?).' 'aviso' }
-        return
-    }
     if ($t.IsFaulted -or $t.IsCanceled) {
+        $erro = 'cancelado'; try { $erro = $t.Exception.GetBaseException().Message } catch {}
+        RegistrarAtu ($script:atuEstado + ': falhou em ' + $ondeAgora + ' - ' + $erro)
+        if (TentarProximoEndereco) { return }
         if ($script:atuEstado -eq 'baixando') { FimAtu 'Nao consegui baixar. Tente de novo mais tarde.' 'aviso' }
         else { FimAtu 'Nao consegui verificar agora (sem internet?).' 'aviso' }
         return
@@ -973,7 +1044,11 @@ $tAtu.Add_Tick({
         try {
             $info = $t.Result | ConvertFrom-Json
             $nova = [version]('' + $info.versao); $atual = [version]$script:VersaoApp
-        } catch { FimAtu 'Resposta do servidor ilegivel. Tente mais tarde.' 'aviso'; return }
+        } catch {
+            RegistrarAtu ('versao.json ilegivel em ' + $ondeAgora)
+            if (TentarProximoEndereco) { return }
+            FimAtu 'Resposta do servidor ilegivel. Tente mais tarde.' 'aviso'; return
+        }
         $script:baseOk = $script:UrlsBase[$script:idxBase]
         $script:cfg.UltimaChecagem = (Get-Date).ToString('o'); SalvarCfg
         if ($nova -gt $atual) {

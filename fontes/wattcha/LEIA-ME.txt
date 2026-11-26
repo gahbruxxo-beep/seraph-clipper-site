@@ -4,14 +4,28 @@ Pagina: https://visusclipper.online/wattcha.html
 Arquivos baixados pelas pessoas (pasta wattcha/ deste repositorio, servida pelo GitHub Pages):
   - Wattcha-Instalador.exe : instalador (so a primeira instalacao)
   - Wattcha.ps1            : o programa (os apps instalados baixam este arquivo sozinhos)
-  - versao.json            : {"versao","sha256","notas"} - o app confere este arquivo 1x por dia
+  - versao.json            : {"versao","sha256","notas","assinatura"} - o app confere este arquivo 1x por dia
+
+Assinatura das atualizacoes (desde a 1.0.4)
+  - "assinatura" = RSA-SHA256 (PKCS#1 v1.5) feita sobre os BYTES do proprio Wattcha.ps1 publicado, em base64.
+  - A chave PUBLICA esta dentro do Wattcha.ps1 ($ChavePublicaAtu). A chave PRIVADA (RSA 3072) fica fora do repo:
+      G:\Meu Drive\VisusTV\4-Chaves-e-senhas\wattcha-assinatura-privada.xml
+    Nunca coloque a chave privada no git. Se ela se perder, sera preciso publicar um app com chave nova
+    (e os apps ja instalados nao aceitam mais atualizacao: teriam que reinstalar pelo site).
+  - A 1.0.4+ so instala se sha256 E assinatura baterem; senao nao troca nada e anota o motivo em
+    %LOCALAPPDATA%\Wattcha\atualizacao.log.
+  - Os apps 1.0.2/1.0.3 so conferem o sha256 (ignoram "assinatura"), por isso os campos antigos continuam.
 
 Para publicar uma versao nova:
  1. Edite fontes/wattcha/Wattcha.ps1 e aumente a linha  $VersaoApp = 'x.y.z'
- 2. Copie para wattcha/Wattcha.ps1 (byte a byte; o .gitattributes impede conversao de quebras de linha)
- 3. Atualize wattcha/versao.json com a nova versao, o SHA-256 do arquivo e uma frase em "notas"
- 4. git push (com o e-mail noreply do GitHub) -> os apps instalados se atualizam sozinhos
-Para refazer o instalador: copie Instalar.ps1, Wattcha.ps1, Abrir-Wattcha.vbs, wattcha.ico e Desinstalar.ps1
-para uma pasta, troque C:\PASTA-DE-BUILD\ no .sed por ela e rode: iexpress /N /Q wattcha-instalador.sed
-(o .sed precisa ter quebras de linha do Windows, CRLF).
+ 2. Rode (no PC que tem o Google Drive com a chave):
+      powershell -NoProfile -ExecutionPolicy Bypass -File fontes\wattcha\publicar-wattcha.ps1 -Notas "o que mudou"
+    (opcional: -ChavePrivada "outro\caminho.xml"  -SemInstalador)
+    Ele confere a sintaxe, copia para wattcha/Wattcha.ps1 byte a byte, calcula o sha256, assina, grava
+    wattcha/versao.json e refaz wattcha/Wattcha-Instalador.exe com o iexpress.
+ 3. Rode o teste:  powershell -NoProfile -ExecutionPolicy Bypass -File fontes\wattcha\testar-assinatura.ps1
+ 4. Atualize a versao escrita no botao de wattcha.html, faca o commit e o git push (com o e-mail noreply do GitHub)
+    -> os apps instalados se atualizam sozinhos.
+O .gitattributes (wattcha/* -text) impede conversao de quebras de linha nos arquivos publicados.
+O .sed da fonte usa C:\PASTA-DE-BUILD\ como marcador; o publicar-wattcha.ps1 troca pela pasta temporaria.
 Ate a versao 1.0.2 o app procurava atualizacoes no servidor da radio; a 1.0.3 foi publicada la tambem como ponte.
