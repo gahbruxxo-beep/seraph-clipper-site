@@ -1,15 +1,15 @@
 {
-    "android":  {
-                    "versionCode":  4,
-                    "versao":  "1.0.3",
-                    "arquivo":  "download/VisusTV.apk",
-                    "sha256":  "a8352121bf7eae87f6dbb21cb3c35c5f50116f83671372f602f8d4e19371b652",
-                    "notas":  "Agora o VisusTV se atualiza sozinho pelo site."
-                },
-    "pc":  {
-               "versao":  "1.0.4",
-               "url":  "https://github.com/gahbruxxo-beep/seraph-clipper-site/releases/download/visustv-pc-1.0.4/visustv.jar",
-               "sha256":  "bc73d1cde3221032b4ddab916cc3657df2831f0674d6337b3fc60ca4e2610921",
-               "notas":  "Agora o VisusTV se atualiza sozinho pelo site."
-           }
+    "android": {
+        "versionCode": 5,
+        "versao": "1.0.4",
+        "arquivo": "download/VisusTV.apk",
+        "sha256": "ffb8ba7ed6b3530dd22a71453ed8847af201af92f45876eb66e38b57cfc563de",
+        "notas": "Entrar com link M3U ficou mais fácil no controle remoto (Fire Stick e TV Box): o Avançar do teclado leva ao botão Entrar."
+    },
+    "pc": {
+        "versao": "1.0.4",
+        "url": "https://github.com/gahbruxxo-beep/seraph-clipper-site/releases/download/visustv-pc-1.0.4/visustv.jar",
+        "sha256": "bc73d1cde3221032b4ddab916cc3657df2831f0674d6337b3fc60ca4e2610921",
+        "notas": "Agora o VisusTV se atualiza sozinho pelo site."
+    }
 }
